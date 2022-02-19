@@ -35,7 +35,6 @@ public class Newservlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
         em.getTransaction().begin();
 
-        // Messageのインスタンスを生成
         Task t = new Task();
 
 
@@ -43,15 +42,15 @@ public class Newservlet extends HttpServlet {
         String content = "hello";
         t.setContent(content);
 
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());     // 現在の日時を取得
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         t.setCreated_at(currentTime);
         t.setUpdated_at(currentTime);
 
-        // データベースに保存
+
         em.persist(t);
         em.getTransaction().commit();
 
-        // 自動採番されたIDの値を表示
+
         response.getWriter().append(Integer.valueOf(t.getId()).toString());
 
         em.close();
